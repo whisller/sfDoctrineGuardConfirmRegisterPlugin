@@ -25,14 +25,16 @@ class PluginsfGuardConfirmRegisterTable extends Doctrine_Table
    * @param  Boolean $isActive The user's status
    *
    * @return sfGuardUser
+   *
+   * @author Daniel Ancuta <whisller@gmail.com>
    */
   public static function retrieveByUsername($username, $isActive = true)
   {
     $query = Doctrine_Core::getTable('sfGuardUser')->createQuery('u')
-      ->innerJoin('u.ConfirmRegister as cr')
-      ->where('u.username = ?',     $username)
-      ->addWhere('u.is_active = ?', $isActive)
-      ->addWhere('cr.confirm = ?',  true);
+                                                   ->innerJoin('u.ConfirmRegister as cr')
+                                                   ->where('u.username = ?',     $username)
+                                                   ->addWhere('u.is_active = ?', $isActive)
+                                                   ->addWhere('cr.confirm = ?',  true);
 
     return $query->fetchOne();
   }
@@ -50,8 +52,8 @@ class PluginsfGuardConfirmRegisterTable extends Doctrine_Table
     public function findOneActiveByHash($hash, $expireAt = null)
     {
         $query = $this->createQuery('sgcr')
-                       ->where('sgcr.hash = ?', array($hash))
-                       ->addWhere('sgcr.confirm = ?', false);
+                      ->where('sgcr.hash = ?', array($hash))
+                      ->addWhere('sgcr.confirm = ?', false);
 
         if (null !== $expireAt) {
             $query->addWhere('sgcr.created_at + ? > now()', $expireAt);
