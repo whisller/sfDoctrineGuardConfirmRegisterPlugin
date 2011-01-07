@@ -43,9 +43,10 @@ For proper works, plugin need sfDoctrinePlugin and sfDoctrineGuardPlugin.
   * Enable one or more modules in your `settings.yml`
     * For your frontend application: sfGuardConfirmRegister
 
-              all:
-                .settings:
-                  enabled_modules:      [default, sfGuardConfirmRegister]
+          [yml]
+          all:
+            settings:
+              enabled_modules:      [default, sfGuardConfirmRegister]
 
   * Modify sfGuardRegisterForm
 
@@ -63,9 +64,10 @@ For proper works, plugin need sfDoctrinePlugin and sfDoctrineGuardPlugin.
 
   * Add to your aplication app.yml
 
-          all:
-            sf_guard_plugin:
-              retrieve_by_username_callable: [sfGuardConfirmRegisterTable, retrieveByUsername]
+        [yml]
+        all:
+          sf_guard_plugin:
+            retrieve_by_username_callable: [sfGuardConfirmRegisterTable, retrieveByUsername]
 
   * Clear you cache
 
