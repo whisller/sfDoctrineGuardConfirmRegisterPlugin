@@ -56,7 +56,7 @@ For proper works, plugin need sfDoctrinePlugin and sfDoctrineGuardPlugin.
         {
             parent::save($con);
 
-            $this->getEventDispatcher()->notify(new sfEvent($this->object, 'sf_guar_user.register_save_object'));
+            $this->getEventDispatcher()->notify(new sfEvent($this->object, 'sf_guard_user.register_save_object'));
 
             return $this->getObject();
         }
