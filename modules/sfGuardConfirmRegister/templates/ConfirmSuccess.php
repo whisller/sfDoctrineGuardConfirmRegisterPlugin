@@ -1,0 +1,1 @@
+<?php echo __('Thanks you for confirmation. Now you can signin.', array(), 'sf_guard_confirm_registration'); ?>

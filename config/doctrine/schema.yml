@@ -1,0 +1,22 @@
+sfGuardConfirmRegister:
+  actAs: [Timestampable]
+  columns:
+    sf_guard_user_id:
+      type: integer(4)
+      notnull: true
+      primary: true
+    hash:
+      type: string(40)
+      notnull: true
+      unique:  true
+    confirm:
+      type:    boolean
+      default: false
+  relations:
+    User:
+      class:       sfGuardUser
+      onDelete:    CASCADE
+      local:       sf_guard_user_id
+      foreign:     id
+      foreignType: one
+      foreignAlias: ConfirmRegister

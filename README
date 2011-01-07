@@ -1,0 +1,86 @@
+# sfDoctrineGuardConfirmRegister plugin (for symfony 1.4) #
+
+The `sfDoctrineGuardConfirmRegister` is adding you ability to confirm registration by your users.
+
+For proper works, plugin need sfDoctrinePlugin and sfDoctrineGuardPlugin.
+
+## Instalation ##
+
+  * Instal the plugin (via Git)
+
+        git checkout git://github.com/whisller/sfDoctrineGuardConfirmRegisterPlugin.git
+
+  * Activate the plugin in the `config/ProjectConfiguration.class.php`
+
+        [php]
+        class ProjectConfiguration extends sfProjectConfiguration
+        {
+          public function setup()
+          {
+            $this->enablePlugins(array(
+              'sfDoctrinePlugin',
+              'sfDoctrineGuardPlugin',
+              'sfDoctrineGuardConfirmRegister',
+              '...'
+            ));
+          }
+        }
+
+  * Rebuild your model
+
+        symfony doctrine:build-model
+        symfony doctrine:build-sql
+
+  * Update you database tables by starting from scratch (it will delete all
+    the existing tables, then re-create them):
+
+        symfony doctrine:insert-sql
+
+    or do everything with one command
+
+        symfony doctrine:build --all --and-load
+
+  * Enable one or more modules in your `settings.yml`
+    * For your frontend application: sfGuardConfirmRegister
+
+              all:
+                .settings:
+                  enabled_modules:      [default, sfGuardConfirmRegister]
+
+  * Modify sfGuardRegisterForm
+
+        cp plugins/sfDoctrineGuardPlugin/lib/form/doctrine/sfGuardUserAdminForm.class.php lib/form/doctrine/
+
+        [php]
+        public function save($con = null)
+        {
+            parent::save($con);
+
+            $this->getEventDispatcher()->notify(new sfEvent($this->object, 'sf_guar_user.register_save_object'));
+
+            return $this->getObject();
+        }
+
+  * Add to your aplication app.yml
+
+          all:
+            sf_guard_plugin:
+              retrieve_by_username_callable: [sfGuardConfirmRegisterTable, retrieveByUsername]
+
+  * Clear you cache
+
+        symfony cc
+
+## Customization ##
+
+  * app_sf_guard_confirm_register_expire (default 604800 - one week)
+
+        Setup expire time after what user will can not confirm registration
+
+  * app_sf_guard_confirm_register_active_user (default true)
+
+        Automaticaly active foreign sfGuardUser
+
+  * app_sf_guard_confirm_register_success_confirm_url (default false)
+
+        Url where user will be redirected after success confirmation
