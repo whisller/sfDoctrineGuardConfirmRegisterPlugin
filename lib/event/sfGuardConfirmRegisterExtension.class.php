@@ -6,7 +6,7 @@
  * @subpackage lib.event
  * @author     Daniel Ancuta <whisller@gmail.com>
  */
-class sfGuardExtension
+class sfGuardConfirmRegisterExtension
 {
     /**
      * Add new record to sfGuardConfirmRegister after registration is finished
