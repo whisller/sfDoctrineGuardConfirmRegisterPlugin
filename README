@@ -86,3 +86,9 @@ For proper works, plugin need sfDoctrinePlugin and sfDoctrineGuardPlugin.
   * app_sf_guard_confirm_register_success_confirm_url (default false)
 
         Url where user will be redirected after success confirmation
+
+## Extension points ##
+
+  * sf_guard_confirm_register.confirm_success
+
+        Event is executed when ConfirmAction is finished. You can use it to add email notification for user and so on :)

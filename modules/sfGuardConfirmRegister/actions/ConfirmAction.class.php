@@ -30,6 +30,8 @@ class ConfirmAction extends sfAction
             $sfGuardUser->save();
         }
 
+        $this->dispatcher->notify(new sfEvent($sfGuardConfirmRegister, 'sf_guard_confirm_register.confirm_success', array('hash' => $hash)));
+
         $url = sfConfig::get('app_sf_guard_confirm_register_success_confirm_url', false);
         if ($url) {
             $this->redirect($url);
