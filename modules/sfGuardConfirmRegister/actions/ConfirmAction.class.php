@@ -15,6 +15,8 @@ class ConfirmAction extends sfAction
     {
         $hash = (string)$request->getParameter('hash');
 
+        $this->forward404If($this->getUser()->isAuthenticated());
+
         $sfGuardConfirmRegister = sfGuardConfirmRegisterTable::getInstance()->findOneActiveByHash($hash, sfConfig::get('app_sf_guard_confirm_register_expire', 604800));
 
         $this->forward404Unless($sfGuardConfirmRegister instanceof sfGuardConfirmRegister);
