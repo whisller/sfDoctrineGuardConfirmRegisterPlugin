@@ -20,7 +20,7 @@ class sfGuardConfirmRegisterRouting
         // preprend our routes
 
         // add route for action to confirm by user
-        $r->prependRoute('sf_guard_confirm_register', new sfRoute('/sf_guard_confirm_register/:hash', array('module' => 'sfGuardConfirmRegister',
-                                                                                                            'action' => 'Confirm')));
+        $r->prependRoute('sf_doctrine_guard_confirm_register_plugin', new sfRoute('/sf_guard_confirm_register/:hash', array('module' => 'sfGuardConfirmRegister',
+                                                                                                                            'action' => 'Confirm')));
     }
 }
