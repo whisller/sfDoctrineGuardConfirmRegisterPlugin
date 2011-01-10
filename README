@@ -75,20 +75,20 @@ For proper works, plugin need sfDoctrinePlugin and sfDoctrineGuardPlugin.
 
 ## Customization ##
 
-  * app_sf_guard_confirm_register_expire (default 604800 - one week)
+  * app_sfDoctrineGuardConfirmRegisterPlugin_expire (default 604800 - one week)
 
         Setup expire time after what user will can not confirm registration
 
-  * app_sf_guard_confirm_register_active_user (default true)
+  * app_sfDoctrineGuardConfirmRegisterPlugin_active_user (default true)
 
         Automaticaly active foreign sfGuardUser
 
-  * app_sf_guard_confirm_register_success_confirm_url (default false)
+  * app_sfDoctrineGuardConfirmRegisterPlugin_success_confirm_url (default false)
 
         Url where user will be redirected after success confirmation
 
 ## Extension points ##
 
-  * sf_guard_confirm_register.confirm_success
+  * sf_doctrine_guard_confirm_register_plugin.confirm_success
 
         Event is executed when ConfirmAction is finished. You can use it to add email notification for user and so on :)

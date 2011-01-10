@@ -17,22 +17,22 @@ class ConfirmAction extends sfAction
 
         $this->forward404If($this->getUser()->isAuthenticated());
 
-        $sfGuardConfirmRegister = sfGuardConfirmRegisterTable::getInstance()->findOneActiveByHash($hash, sfConfig::get('app_sf_guard_confirm_register_expire', 604800));
+        $sfGuardConfirmRegister = sfGuardConfirmRegisterTable::getInstance()->findOneActiveByHash($hash, sfConfig::get('app_sfDoctrineGuardConfirmRegisterPlugin_expire', 604800));
 
         $this->forward404Unless($sfGuardConfirmRegister instanceof sfGuardConfirmRegister);
 
         $sfGuardConfirmRegister->setConfirm(true);
         $sfGuardConfirmRegister->save();
 
-        if (sfConfig::get('app_sf_guard_confirm_register_active_user', true)) {
+        if (sfConfig::get('app_sfDoctrineGuardConfirmRegisterPlugin_active_user', true)) {
             $sfGuardUser = $sfGuardConfirmRegister->User;
             $sfGuardUser->setIsActive(true);
             $sfGuardUser->save();
         }
 
-        $this->dispatcher->notify(new sfEvent($sfGuardConfirmRegister, 'sf_guard_confirm_register.confirm_success', array('hash' => $hash)));
+        $this->dispatcher->notify(new sfEvent($sfGuardConfirmRegister, 'sf_doctrine_guard_confirm_register_plugin.confirm_success', array('hash' => $hash)));
 
-        $url = sfConfig::get('app_sf_guard_confirm_register_success_confirm_url', false);
+        $url = sfConfig::get('app_sfDoctrineGuardConfirmRegisterPlugin_success_confirm_url', false);
         if ($url) {
             $this->redirect($url);
         }
